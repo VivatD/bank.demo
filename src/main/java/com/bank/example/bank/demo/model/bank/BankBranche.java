@@ -1,5 +1,6 @@
-package com.bank.example.bank.demo.model;
+package com.bank.example.bank.demo.model.bank;
 
+import com.bank.example.bank.demo.model.employee.Employees;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

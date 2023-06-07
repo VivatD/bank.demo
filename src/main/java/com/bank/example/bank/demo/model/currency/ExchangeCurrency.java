@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 @Entity
-@Table(name = "exchangeCurrency")
-public class exchangeCurrency {
+@Table(name = "ExchangeCurrency")
+public class ExchangeCurrency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idExchangeCurrency;
@@ -20,10 +20,10 @@ public class exchangeCurrency {
     @Column(name = "date")
     private Date date;
 
-    public exchangeCurrency() {
+    public ExchangeCurrency() {
     }
 
-    public exchangeCurrency(long idExchangeCurrency, long MDL, long USD, long EUR, long RON, Date date) {
+    public ExchangeCurrency(long idExchangeCurrency, long MDL, long USD, long EUR, long RON, Date date) {
         this.idExchangeCurrency = idExchangeCurrency;
         this.MDL = MDL;
         this.USD = USD;

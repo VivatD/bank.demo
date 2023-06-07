@@ -1,9 +1,7 @@
-package com.bank.example.bank.demo.model;
+package com.bank.example.bank.demo.model.employee;
 
+import com.bank.example.bank.demo.model.bank.BankBranche;
 import jakarta.persistence.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "employee")
@@ -20,7 +18,7 @@ public class Employees {
     @Column(name = "mobile_number")
     private String mobileNumber;
     @Column(name = "employee_function")
-    private String function;
+    private EmployeeFunction function;
 
     @ManyToOne
     private BankBranche bankBranche;
@@ -58,11 +56,11 @@ public class Employees {
         this.mobileNumber = mobileNumber;
     }
 
-    public String getFunction() {
+    public EmployeeFunction getFunction() {
         return function;
     }
 
-    public void setFunction(String function) {
+    public void setFunction(EmployeeFunction function) {
         this.function = function;
     }
 }
