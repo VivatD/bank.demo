@@ -1,11 +1,21 @@
 package com.bank.example.bank.demo.model.client;
 
-public class Client {
-    private long idClient;
-    private String firstName;
-    private String lastName;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "client")
+public class Client {
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @Column(name = "client_id")
+    private long idClient;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "idnp")
     private String idnp;
+    @Column(name = "phoneNumber")
     private String phoneNumber;
 
     public Client() {
