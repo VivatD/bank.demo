@@ -15,13 +15,13 @@ public class BankService  {
     }
     public void withdrawFunds(long amouns, String currency){
         if(currency.equals("MDL")){
-            balanceMDL += amouns;
+            balanceMDL -= amouns;
         } else if (currency.equals("USD")) {
-            balanceUSD += amouns;
+            balanceUSD -= amouns;
         } else if (currency.equals("EURO")) {
-            balanceEUR += amouns;
+            balanceEUR -= amouns;
         } else if (currency.equals("RON")) {
-            balanceRON += amouns;
+            balanceRON -= amouns;
         }
 
     }
