@@ -18,16 +18,17 @@ public class Bank {
     @OneToMany(mappedBy = "bank")
     private List<BankBranche> bankBrancheList = new ArrayList<>();
 
-//    @Column(name = "BalanceMDL")
-//    private long BalanceMDL;
-//    @Column(name = "BalanceEUR")
-//    private long BalanceEUR;
-//    @Column(name = "BalanceUSD")
-//    private long BalanceUSD;
-//    @Column(name = "BalanceRON")
-//    private long BalanceRON;
+    @Column(name = "balance_MDL")
+    private long balanceMDL;
 
+    @Column(name = "balance_EUR")
+    private long balanceEUR;
 
+    @Column(name = "balance_USD")
+    private long balanceUSD;
+
+    @Column(name = "balance_RON")
+    private long balanceRON;
 
     public Bank() {
     }
@@ -54,35 +55,42 @@ public class Bank {
     public void setAddress(String address) {
         this.address = address;
     }
-//    public long getBalanceMDL() {
-//        return BalanceMDL;
-//    }
-//    public void setBalanceMDL(long balanceMDL) {
-//        BalanceMDL = balanceMDL;
-//    }
-//    public long getBalanceUSD() {
-//        return BalanceUSD;
-//    }
-//
-//    public void setBalanceUSD(long balanceUSD) {
-//        BalanceUSD = balanceUSD;
-//    }
-//
-//    public long getBalanceEUR() {
-//        return BalanceEUR;
-//    }
-//
-//    public void setBalanceEUR(long balanceEUR) {
-//        BalanceEUR = balanceEUR;
-//    }
-//
-//    public long getBalanceRON() {
-//        return BalanceRON;
-//    }
-//
-//    public void setBalanceRON(long balanceRON) {
-//        BalanceRON = balanceRON;
-//    }
+    public List<BankBranche> getBankBrancheList() {
+        return bankBrancheList;
+    }
+    public void setBankBrancheList(List<BankBranche> bankBrancheList) {
+        this.bankBrancheList = bankBrancheList;
+    }
+
+    public long getBalanceMDL() {
+        return balanceMDL;
+    }
+    public void setBalanceMDL(long balanceMDL) {
+        balanceMDL = balanceMDL;
+    }
+    public long getBalanceUSD() {
+        return balanceUSD;
+    }
+
+    public void setBalanceUSD(long balanceUSD) {
+        balanceUSD = balanceUSD;
+    }
+
+    public long getBalanceEUR() {
+        return balanceEUR;
+    }
+
+    public void setBalanceEUR(long balanceEUR) {
+        balanceEUR = balanceEUR;
+    }
+
+    public long getBalanceRON() {
+        return balanceRON;
+    }
+
+    public void setBalanceRON(long balanceRON) {
+        balanceRON = balanceRON;
+    }
 
 
 }
