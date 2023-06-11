@@ -1,23 +1,14 @@
 package com.bank.example.bank.demo.repository;
 
 import com.bank.example.bank.demo.model.bank.Bank;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.sql.SQLException;
 
-interface BankRepository {
-    // TODO: 10.06.2023   adauga de aduagare de banka
-    // TODO: 10.06.2023   delete banka
-    // TODO: 10.06.2023   update bank
-    // TODO: 10.06.2023   citirea banci
-    // TODO: 10.06.2023   facem interface pentru ele si apoi implementarile pentru ele
+@Repository
+public interface BankRepository extends JpaRepository<Bank, Long> {
 
-    void addBank(Bank bank);
-
-    void deleteBank(Bank bank);
-
-    void updateBank(Bank bank);
-
-    Bank getBankById(long id);
-
-    List<Bank>getAllBanks();
+    Bank findBankByName(String bankName) throws SQLException;
+    Bank findBankByAddress(String bankAddress) throws SQLException;
 }

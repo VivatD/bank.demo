@@ -1,5 +1,6 @@
 package com.bank.example.bank.demo.model.bank;
 
+import com.bank.example.bank.demo.model.client.Client;
 import com.bank.example.bank.demo.model.employee.Employees;
 import jakarta.persistence.*;
 
@@ -30,8 +31,13 @@ public class BankBranche {
 
     @ManyToOne
     private Bank bank;
-    @OneToMany(mappedBy = "bankBranche")
+   // @OneToMany(mappedBy = "bank_branche")
+   @OneToMany
     private List<Employees> employees = new ArrayList<>();
+
+    //@OneToMany(mappedBy = "bankbranch", cascade = CascadeType.ALL)
+    @OneToMany
+    private List<Client> clientList = new ArrayList<>();
 
     public BankBranche(long id, String name, String address) {
         this.id = id;
@@ -43,8 +49,51 @@ public class BankBranche {
 //        this.BrancheBalanceRON = brancheBalanceRON;
     }
 
+    public BankBranche(String name, String address, Bank bank, List<Employees> employees,
+                       List<Client> clientList) {
+        this.name = name;
+        this.address = address;
+        this.bank = bank;
+        this.employees = employees;
+        this.clientList = clientList;
+    }
+
+    public BankBranche(long id, String name, String address, Bank bank,
+                       List<Employees> employees, List<Client> clientList) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.bank = bank;
+        this.employees = employees;
+        this.clientList = clientList;
+    }
+
     public BankBranche() {
 
+    }
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
+
+    public List<Employees> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employees> employees) {
+        this.employees = employees;
+    }
+
+    public List<Client> getClientList() {
+        return clientList;
+    }
+
+    public void setClientList(List<Client> clientList) {
+        this.clientList = clientList;
     }
 
     public long getId() {

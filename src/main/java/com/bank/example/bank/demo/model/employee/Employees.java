@@ -21,6 +21,7 @@ public class Employees {
     private EmployeeFunction function;
 
     @ManyToOne
+    @JoinColumn(name = "bank_branche_id")
     private BankBranche bankBranche;
 
 

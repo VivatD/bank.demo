@@ -1,5 +1,6 @@
 package com.bank.example.bank.demo.model.client;
 
+import com.bank.example.bank.demo.model.bank.BankBranche;
 import com.bank.example.bank.demo.model.currency.Currency;
 import jakarta.persistence.*;
 
@@ -8,15 +9,14 @@ import jakarta.persistence.*;
 public class Client {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    @Column(name = "client_id")
+  //  @Column(name = "client_id")
     private long idClient;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "idnp")
+    @Column(name = "idnp",unique = true)
     private String idnp;
-
     @Column(name = "phoneNumber")
     private String phoneNumber;
     @Column(name = "type_client")
@@ -26,12 +26,15 @@ public class Client {
     private Currency typeCurrensy;
     @Column(name = "amount_currency")
     private long amountCurrency;
+    @ManyToOne
+   @JoinColumn(name = "bank_branche_id")
+    private BankBranche bankBranche;
 
     public Client() {
     }
 
     public Client(long idClient, String firstName, String lastName, String idnp, String phoneNumber,
-                  TypeClient typeClient, Currency typeCurrensy, long amountCurrency) {
+                  TypeClient typeClient, Currency typeCurrensy, long amountCurrency, BankBranche bankBranche) {
         this.idClient = idClient;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,6 +43,27 @@ public class Client {
         this.typeClient = typeClient;
         this.typeCurrensy = typeCurrensy;
         this.amountCurrency = amountCurrency;
+        this.bankBranche = bankBranche;
+    }
+
+    public Client(String firstName, String lastName, String idnp, String phoneNumber,
+                  TypeClient typeClient, Currency typeCurrensy, long amountCurrency, BankBranche bankBranche) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.idnp = idnp;
+        this.phoneNumber = phoneNumber;
+        this.typeClient = typeClient;
+        this.typeCurrensy = typeCurrensy;
+        this.amountCurrency = amountCurrency;
+        this.bankBranche = bankBranche;
+    }
+
+    public BankBranche getBankBranche() {
+        return bankBranche;
+    }
+
+    public void setBankBranche(BankBranche bankBranche) {
+        this.bankBranche = bankBranche;
     }
 
     public Currency getTypeCurrensy() {
@@ -106,6 +130,7 @@ public class Client {
         this.phoneNumber = phoneNumber;
     }
 
+
     @Override
     public String toString() {
         return "Client{" +
@@ -115,6 +140,8 @@ public class Client {
                 ", idnp='" + idnp + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", typeClient=" + typeClient +
+                ", typeCurrensy=" + typeCurrensy +
+                ", amountCurrency=" + amountCurrency +
                 '}';
     }
 }
