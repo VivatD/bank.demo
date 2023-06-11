@@ -5,6 +5,7 @@ import com.bank.example.bank.demo.model.employee.Employees;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 @Entity
@@ -29,10 +30,11 @@ public class BankBranche {
 //    @Column(name = "branche_ron")
 //    private long BrancheBalanceRON;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bank_id")
     private Bank bank;
-   // @OneToMany(mappedBy = "bank_branche")
-   @OneToMany
+    // @OneToMany(mappedBy = "bank_branche")
+    @OneToMany
     private List<Employees> employees = new ArrayList<>();
 
     //@OneToMany(mappedBy = "bankbranch", cascade = CascadeType.ALL)
@@ -49,8 +51,7 @@ public class BankBranche {
 //        this.BrancheBalanceRON = brancheBalanceRON;
     }
 
-    public BankBranche(String name, String address, Bank bank, List<Employees> employees,
-                       List<Client> clientList) {
+    public BankBranche(Bank bank) {
         this.name = name;
         this.address = address;
         this.bank = bank;
@@ -118,6 +119,62 @@ public class BankBranche {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void deposit(Currency currency, double amount) {
+
+        if (amount <= 0) {
+            System.out.println("Amount must be greater than zero.");
+            return;
+        }
+
+
+        if (!isCurrencyAccepted(currency)) {
+            System.out.println("Currency not accepted by the bank branch.");
+            return;
+        }
+
+
+        performDepositOperations(currency, amount);
+    }
+
+    private boolean isCurrencyAccepted(Currency currency) {
+
+        return true;
+    }
+
+    private void performDepositOperations(Currency currency, double amount) {
+
+
+        if (currency.equals(Currency.getInstance("MDL"))) {
+            System.out.println("actualizați soldul în MDL");
+        } else if (currency.equals(Currency.getInstance("USD"))) {
+            System.out.println("actualizați soldul în USD");
+        } else if (currency.equals(Currency.getInstance("EUR"))) {
+            System.out.println("actualizați soldul în EUR");
+        } else if (currency.equals(Currency.getInstance("RON"))) {
+            System.out.println("actualizați soldul în RON");
+        }
+    }
+
+    public void open() {
+        System.out.println("Bank branch is now open!");
+    }
+
+    public void openBranch() {
+        System.out.println("New bank branch opened");
+    }
+
+    public void deposit1(Currency currency, double amount) {
+        if (currency.equals(Currency.getInstance("MDL"))) {
+            System.out.println("actualizați soldul în MDL");
+        } else if (currency.equals(Currency.getInstance("USD"))) {
+            System.out.println("actualizați soldul în USD");
+        } else if (currency.equals(Currency.getInstance("EUR"))) {
+            System.out.println("actualizați soldul în EUR");
+        } else if (currency.equals(Currency.getInstance("RON"))) {
+            System.out.println("actualizați soldul în RON");
+        }
     }
 //
 //    public long getBrancheBalanceMDL() {

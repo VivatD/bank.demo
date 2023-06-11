@@ -1,16 +1,16 @@
 package com.bank.example.bank.demo.service.bankBrancheService;
 
-import com.bank.example.bank.demo.model.bank.Bank;
 import com.bank.example.bank.demo.model.bank.BankBranche;
-import com.bank.example.bank.demo.repository.BankBranchRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface BankBrancheService {
+    void openBranch();
     void addBankBranche(BankBranche bankBranche);
     List<BankBranche> loadAllBankBranche();
-    List<BankBranche> findBankBrancheByName(String name);
-    List<BankBranche> findBankBrancheByAddress(String address);
+    BankBranche findBankBrancheByName(String name) throws SQLException;
+    BankBranche findBankBrancheByAddress(String address) throws SQLException;
     void deleteBankBrancheByID(long id);
     void updateBankBranche(BankBranche bankBranche);
 }
