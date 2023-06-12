@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 
@@ -16,36 +17,36 @@ import java.util.List;
 public class BankServiceImpl implements BankService {
     @Autowired
     private BankRepository bankRepository;
-    private Bank bank;
-    private BankBranche bankBranch;
-
-    public BankServiceImpl() {
-        bank = new Bank();
-        bankBranch = new BankBranche(bank);
-    }
-
+//    private Bank bank;
+//    private BankBranche bankBranch;
+//
+//    public BankServiceImpl() {
+//        bank = new Bank();
+//        bankBranch = new BankBranche(bank);
+//    }
+//
 
     // trebu de modificat
-    public void addFunds(double amount, String currency) {
-        Currency cur = Currency.getInstance(currency);
-        bank.deposit(cur, amount);
-        double taxAmount = amount * 0.05;
-        bank.withdraw(cur, taxAmount);
-        bankBranch.deposit(cur, taxAmount);
-    }
-
-    public void withdrawFunds(double amount, String currency) {
-        Currency cur = Currency.getInstance(currency);
-        bank.withdraw(cur, amount);
-        double taxAmount = amount * 0.05;
-        bank.withdraw(cur, taxAmount);
-        bankBranch.deposit(cur, taxAmount);
-    }
-
-    public void openBankBranch() {
-        bankBranch.open();
-    }
-
+//    public void addFunds(double amount, String currency) {
+//        Currency cur = Currency.getInstance(currency);
+//        bank.deposit(cur, amount);
+//        double taxAmount = amount * 0.05;
+//        bank.withdraw(cur, taxAmount);
+//        bankBranch.deposit(cur, taxAmount);
+//    }
+//
+//    public void withdrawFunds(double amount, String currency) {
+//        Currency cur = Currency.getInstance(currency);
+//        bank.withdraw(cur, amount);
+//        double taxAmount = amount * 0.05;
+//        bank.withdraw(cur, taxAmount);
+//        bankBranch.deposit(cur, taxAmount);
+//    }
+//
+//    public void openBankBranch() {
+//        bankBranch.open();
+//    }
+//
 
 //    public  void addFunds(Bank ank,long amuons, String currency){
 //        if(currency.equals("MDL")){
@@ -70,47 +71,60 @@ public class BankServiceImpl implements BankService {
 //        }
 
 
-    @Override
-    public double getBalance() {
-        return bank.getBalance();
-    }
-
-    @Override
-    public void deposit(double amount) {
-        bank.deposit(amount);
-    }
-
-    @Override
-    public void withdraw(double amount) {
-        bank.withdraw(amount);
-    }
+//    @Override
+//    public double getBalance() {
+//        return bank.getBalance();
+//    }
+//
+//    @Override
+//    public void deposit(double amount) {
+//        bank.deposit(amount);
+//    }
+//
+//    @Override
+//    public void withdraw(double amount) {
+//        bank.withdraw(amount);
+//    }
 
     @Override
     public void addBank(Bank bank) {
-        //TODO: exemplu
-        System.out.println("service adding bank to central");
+        System.out.println("service adding bank  central");
         bankRepository.save(bank);
     }
 
     @Override
     public List<Bank> loadAllBank() {
-        //TODO: exmplu
         System.out.println("service loading all bank");
         return bankRepository.findAll();
     }
 
     @Override
-    public Bank findBankByName(String name) throws SQLException {
-        //TODO: trebui de implimentat
+    public  List<Bank>  findBankByName(String name)  {
         System.out.println("Service - Finding banks by name");
-        return bankRepository.findBankByName(name);
+        List<Bank>  bankList = new ArrayList<>();
+        Bank bank = null;
+        try {
+            bank =  bankRepository.findBankByName(name);
+            bankList.add(bank);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return bankList;
     }
 
     @Override
-    public Bank findBankByAddress(String address) throws SQLException {
-        //TODO: trebui de implimentat
+    public  List<Bank>  findBankByAddress(String address)  {
         System.out.println("Service - Finding banks by address");
-        return bankRepository.findBankByAddress(address);
+        List<Bank> bankList = new ArrayList<>();
+        Bank bankAddres = null;
+
+        try {
+            bankAddres = bankRepository.findBankByAddress(address);
+            bankList.add(bankAddres);
+        } catch (SQLException e){
+            throw new RuntimeException(e.getMessage());
+        }
+        return bankList;
     }
 
     @Override
@@ -121,14 +135,11 @@ public class BankServiceImpl implements BankService {
 
     @Override
     public void deleteBankByID(long id) {
-        //TODO: trebui de implimentat
         bankRepository.deleteById(id);
     }
 
     @Override
     public void updateBank(Bank bank) {
-        //TODO: trebui de implimentat
-
         System.out.println("Service - Update bank");
 
         Bank existingBank = bankRepository.findById(bank.getId()).orElse(null);

@@ -7,15 +7,15 @@ import java.sql.SQLException;
 import java.util.List;
 @Service
 public interface BankService {
-    double getBalance();
-
-    void deposit(double amount);
-
-    void withdraw(double amount);
+//    double getBalance();
+//
+//    void deposit(double amount);
+//
+//    void withdraw(double amount);
     void addBank(Bank bank);
     List<Bank> loadAllBank();
-    Bank findBankByName(String name) throws SQLException;
-    Bank findBankByAddress(String address) throws SQLException;
+    List<Bank>  findBankByName(String bankName);
+    List<Bank>  findBankByAddress(String bankAddress);
 
     Bank getBankById(long id);
 
