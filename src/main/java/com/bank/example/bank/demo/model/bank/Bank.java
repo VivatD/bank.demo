@@ -30,7 +30,7 @@ public class Bank {
     @Column(name = "balance_RON")
     private long balanceRON;
 
-    @OneToMany(mappedBy = "bank")
+    @OneToMany
     private List<BankBranche> bankBrancheList = new ArrayList<>();
 
 //    private double balance;

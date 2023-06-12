@@ -1,7 +1,10 @@
 package com.bank.example.bank.demo.service.bankBrancheService;
 
+import com.bank.example.bank.demo.model.bank.Bank;
 import com.bank.example.bank.demo.model.bank.BankBranche;
 import com.bank.example.bank.demo.repository.BankBranchRepository;
+import com.bank.example.bank.demo.repository.BankRepository;
+import com.bank.example.bank.demo.service.bankService.BankService;
 import com.bank.example.bank.demo.service.bankService.BankServiceImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +22,14 @@ public class BankBrancheServiceImpl implements BankBrancheService {
 
     @Override
     public void openBranch() {
+        BankService bankService = null;
+        Bank bank = bankService.getBankById(9);
+        bank.getBalanceMDL();
 
     }
 
     @Override
     public void addBankBranche(BankBranche bankBranche) {
-
         System.out.println("service to add bankbrach");
         bankBranchRepository.save(bankBranche);
     }
@@ -59,7 +64,7 @@ public class BankBrancheServiceImpl implements BankBrancheService {
         try {
             bankBranche = bankBranchRepository.findBankBrancheByAddress(address);
             bankBranches.add(bankBranche);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
             //TODO: trebui de afisare catre utlizator
         }
