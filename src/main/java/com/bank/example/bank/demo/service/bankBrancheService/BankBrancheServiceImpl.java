@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 @Service
 @Transactional
-public class BankBrancheServiceImpl extends BankServiceImpl implements BankBrancheService{
+public class BankBrancheServiceImpl  implements BankBrancheService{
     @Autowired
     private BankBranchRepository bankBranchRepository;
 

@@ -6,6 +6,7 @@ import com.bank.example.bank.demo.service.bankService.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -24,5 +25,29 @@ public class BankController {
         return bankService.loadAllBank();
     }
 
-    //TODO: pentru toater metodele din BankServiceImpl trebui de factu controller
+    @GetMapping("/name/{bankName}")
+    public List<Bank> findBankByName(@PathVariable String bankName) {
+        return bankService.findBankByName(bankName);
+    }
+
+    @GetMapping("/address/{bankAddress}")
+    public List<Bank> findBankByAddress(@PathVariable  String bankAddress) {
+        return bankService.findBankByAddress(bankAddress);
+    }
+
+    @GetMapping("/id/{id}")
+    Bank getBankByID(@PathVariable long id){
+        return bankService.getBankById(id);
+    }
+
+    @DeleteMapping("/id/{id}")
+    void deleteBankByID(@PathVariable long id){
+        bankService.deleteBankByID(id);
+    }
+
+    @PutMapping("/update")
+    void updateBank(@RequestBody Bank bank){
+        bankService.updateBank(bank);
+    }
+
 }

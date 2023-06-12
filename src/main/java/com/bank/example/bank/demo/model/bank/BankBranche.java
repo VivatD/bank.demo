@@ -21,14 +21,14 @@ public class BankBranche {
     @Column(name = "branche_address")
     private String address;
 
-//    @Column(name = "branche_mdl")
-//    private long BrancheBalanceMDL;
-//    @Column(name = "branche_usd")
-//    private long BrancheBalanceUSD;
-//    @Column(name = "branche_eur")
-//    private long BrancheBalanceEUR;
-//    @Column(name = "branche_ron")
-//    private long BrancheBalanceRON;
+    @Column(name = "branche_mdl")
+    private long BrancheBalanceMDL;
+    @Column(name = "branche_usd")
+    private long BrancheBalanceUSD;
+    @Column(name = "branche_eur")
+    private long BrancheBalanceEUR;
+    @Column(name = "branche_ron")
+    private long BrancheBalanceRON;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bank_id")
@@ -41,15 +41,7 @@ public class BankBranche {
     @OneToMany
     private List<Client> clientList = new ArrayList<>();
 
-    public BankBranche(long id, String name, String address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-//        this.BrancheBalanceMDL = brancheBalanceMDL;
-//        this.BrancheBalanceUSD = brancheBalanceUSD;
-//        this.BrancheBalanceEUR = brancheBalanceEUR;
-//        this.BrancheBalanceRON = brancheBalanceRON;
-    }
+
 
     public BankBranche(Bank bank) {
         this.name = name;
@@ -120,92 +112,61 @@ public class BankBranche {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    public void deposit(Currency currency, double amount) {
-
-        if (amount <= 0) {
-            System.out.println("Amount must be greater than zero.");
-            return;
-        }
-
-
-        if (!isCurrencyAccepted(currency)) {
-            System.out.println("Currency not accepted by the bank branch.");
-            return;
-        }
-
-
-        performDepositOperations(currency, amount);
-    }
-
-    private boolean isCurrencyAccepted(Currency currency) {
-
-        return true;
-    }
-
-    private void performDepositOperations(Currency currency, double amount) {
-
-
-        if (currency.equals(Currency.getInstance("MDL"))) {
-            System.out.println("actualizați soldul în MDL");
-        } else if (currency.equals(Currency.getInstance("USD"))) {
-            System.out.println("actualizați soldul în USD");
-        } else if (currency.equals(Currency.getInstance("EUR"))) {
-            System.out.println("actualizați soldul în EUR");
-        } else if (currency.equals(Currency.getInstance("RON"))) {
-            System.out.println("actualizați soldul în RON");
-        }
-    }
-
-    public void open() {
-        System.out.println("Bank branch is now open!");
-    }
-
-    public void openBranch() {
-        System.out.println("New bank branch opened");
-    }
-
-    public void deposit1(Currency currency, double amount) {
-        if (currency.equals(Currency.getInstance("MDL"))) {
-            System.out.println("actualizați soldul în MDL");
-        } else if (currency.equals(Currency.getInstance("USD"))) {
-            System.out.println("actualizați soldul în USD");
-        } else if (currency.equals(Currency.getInstance("EUR"))) {
-            System.out.println("actualizați soldul în EUR");
-        } else if (currency.equals(Currency.getInstance("RON"))) {
-            System.out.println("actualizați soldul în RON");
-        }
-    }
 //
-//    public long getBrancheBalanceMDL() {
-//        return BrancheBalanceMDL;
+//    public void deposit(Currency currency, double amount) {
+//
+//        if (amount <= 0) {
+//            System.out.println("Amount must be greater than zero.");
+//            return;
+//        }
+//
+//
+//        if (!isCurrencyAccepted(currency)) {
+//            System.out.println("Currency not accepted by the bank branch.");
+//            return;
+//        }
+//
+//
+//        performDepositOperations(currency, amount);
 //    }
 //
-//    public void setBrancheBalanceMDL(long brancheBalanceMDL) {
-//        BrancheBalanceMDL = brancheBalanceMDL;
+//    private boolean isCurrencyAccepted(Currency currency) {
+//
+//        return true;
 //    }
 //
-//    public long getBrancheBalanceUSD() {
-//        return BrancheBalanceUSD;
+//    private void performDepositOperations(Currency currency, double amount) {
+//
+//
+//        if (currency.equals(Currency.getInstance("MDL"))) {
+//            System.out.println("actualizați soldul în MDL");
+//        } else if (currency.equals(Currency.getInstance("USD"))) {
+//            System.out.println("actualizați soldul în USD");
+//        } else if (currency.equals(Currency.getInstance("EUR"))) {
+//            System.out.println("actualizați soldul în EUR");
+//        } else if (currency.equals(Currency.getInstance("RON"))) {
+//            System.out.println("actualizați soldul în RON");
+//        }
 //    }
 //
-//    public void setBrancheBalanceUSD(long brancheBalanceUSD) {
-//        BrancheBalanceUSD = brancheBalanceUSD;
+//    public void open() {
+//        System.out.println("Bank branch is now open!");
 //    }
 //
-//    public long getBrancheBalanceEUR() {
-//        return BrancheBalanceEUR;
+//    public void openBranch() {
+//        System.out.println("New bank branch opened");
 //    }
 //
-//    public void setBrancheBalanceEUR(long brancheBalanceEUR) {
-//        BrancheBalanceEUR = brancheBalanceEUR;
+//    public void deposit1(Currency currency, double amount) {
+//        if (currency.equals(Currency.getInstance("MDL"))) {
+//            System.out.println("actualizați soldul în MDL");
+//        } else if (currency.equals(Currency.getInstance("USD"))) {
+//            System.out.println("actualizați soldul în USD");
+//        } else if (currency.equals(Currency.getInstance("EUR"))) {
+//            System.out.println("actualizați soldul în EUR");
+//        } else if (currency.equals(Currency.getInstance("RON"))) {
+//            System.out.println("actualizați soldul în RON");
+//        }
 //    }
-//
-//    public long getBrancheBalanceRON() {
-//        return BrancheBalanceRON;
-//    }
-//
-//    public void setBrancheBalanceRON(long brancheBalanceRON) {
-//        BrancheBalanceRON = brancheBalanceRON;
-//    }
+
 }
