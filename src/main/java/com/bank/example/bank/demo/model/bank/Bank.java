@@ -117,7 +117,7 @@ public class Bank {
     }
 
     public void setBalanceMDL(long balanceMDL) {
-        balanceMDL = balanceMDL;
+        this.balanceMDL = balanceMDL;
     }
 
     public long getBalanceUSD() {
@@ -125,7 +125,7 @@ public class Bank {
     }
 
     public void setBalanceUSD(long balanceUSD) {
-        balanceUSD = balanceUSD;
+        this.balanceUSD = balanceUSD;
     }
 
     public long getBalanceEUR() {
@@ -133,7 +133,7 @@ public class Bank {
     }
 
     public void setBalanceEUR(long balanceEUR) {
-        balanceEUR = balanceEUR;
+        this.balanceEUR = balanceEUR;
     }
 
     public long getBalanceRON() {
@@ -141,7 +141,7 @@ public class Bank {
     }
 
     public void setBalanceRON(long balanceRON) {
-        balanceRON = balanceRON;
+        this.balanceRON = balanceRON;
     }
 
 //    @OneToOne(fetch = FetchType.LAZY, mappedBy = "bank")
