@@ -22,5 +22,30 @@ public class BankBranchController {
     public List<BankBranche> getAllBank() {
         return bankBrancheService.loadAllBankBranche();
     }
-    //TODO: pentru toater metodele din BankBranckeServiceImpl trebui de factu controller
+
+    @GetMapping("/branchename/{brancheName}")
+    public List<BankBranche> findBankBrancheByName(@PathVariable String brancheName){
+        return bankBrancheService.findBankBrancheByName(brancheName);
+    }
+
+    @GetMapping("/address/{brancheAddress}")
+    public List<BankBranche> findBankBrancheByAddress(@PathVariable String brancheAddress){
+        return bankBrancheService.findBankBrancheByAddress(brancheAddress);
+    }
+
+    @GetMapping("/id/{id}")
+    BankBranche getBankBrancheByID(@PathVariable long id){
+        return bankBrancheService.getBankBrancheByID(id);
+    }
+
+    @DeleteMapping("/id/{id}")
+    void deleteBankBrancheByID(@PathVariable long id){
+        bankBrancheService.deleteBankBrancheByID(id);
+    }
+
+    @PutMapping("/update")
+    void updateBankBrache(@RequestBody BankBranche bankBranche){
+        bankBrancheService.updateBankBranche(bankBranche);
+    }
+
 }

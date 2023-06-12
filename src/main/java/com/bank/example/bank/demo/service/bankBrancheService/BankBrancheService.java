@@ -9,8 +9,9 @@ public interface BankBrancheService {
     void openBranch();
     void addBankBranche(BankBranche bankBranche);
     List<BankBranche> loadAllBankBranche();
-    BankBranche findBankBrancheByName(String name) throws SQLException;
-    BankBranche findBankBrancheByAddress(String address) throws SQLException;
+    List<BankBranche> findBankBrancheByName(String name);
+    List<BankBranche> findBankBrancheByAddress(String address);
+    BankBranche getBankBrancheByID(long id);
     void deleteBankBrancheByID(long id);
     void updateBankBranche(BankBranche bankBranche);
 }

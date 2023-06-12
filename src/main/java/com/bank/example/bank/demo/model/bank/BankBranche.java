@@ -5,7 +5,6 @@ import com.bank.example.bank.demo.model.employee.Employees;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 @Entity
@@ -22,13 +21,13 @@ public class BankBranche {
     private String address;
 
     @Column(name = "branche_mdl")
-    private long BrancheBalanceMDL;
+    private long brancheBalanceMDL;
     @Column(name = "branche_usd")
-    private long BrancheBalanceUSD;
+    private long brancheBalanceUSD;
     @Column(name = "branche_eur")
-    private long BrancheBalanceEUR;
+    private long brancheBalanceEUR;
     @Column(name = "branche_ron")
-    private long BrancheBalanceRON;
+    private long brancheBalanceRON;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bank_id")
@@ -42,30 +41,36 @@ public class BankBranche {
     private List<Client> clientList = new ArrayList<>();
 
 
-
-    public BankBranche(Bank bank) {
-        this.name = name;
-        this.address = address;
-        this.bank = bank;
-        this.employees = employees;
-        this.clientList = clientList;
-    }
-
-    public BankBranche(long id, String name, String address, Bank bank,
-                       List<Employees> employees, List<Client> clientList) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.bank = bank;
-        this.employees = employees;
-        this.clientList = clientList;
-    }
-
     public BankBranche() {
 
     }
 
-    public Bank getBank() {
+    public BankBranche(long id, String name, String address, long brancheBalanceMDL, long brancheBalanceUSD,
+                       long brancheBalanceEUR, long brancheBalanceRON, List<Employees> employees, List<Client> clientList) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.brancheBalanceMDL = brancheBalanceMDL;
+        this.brancheBalanceUSD = brancheBalanceUSD;
+        this.brancheBalanceEUR = brancheBalanceEUR;
+        this.brancheBalanceRON = brancheBalanceRON;
+        this.employees = employees;
+        this.clientList = clientList;
+    }
+
+    public BankBranche(String name, String address, long brancheBalanceMDL, long brancheBalanceUSD,
+                       long brancheBalanceEUR, long brancheBalanceRON, List<Employees> employees, List<Client> clientList) {
+        this.name = name;
+        this.address = address;
+        this.brancheBalanceMDL = brancheBalanceMDL;
+        this.brancheBalanceUSD = brancheBalanceUSD;
+        this.brancheBalanceEUR = brancheBalanceEUR;
+        this.brancheBalanceRON = brancheBalanceRON;
+        this.employees = employees;
+        this.clientList = clientList;
+    }
+
+        public Bank getBank() {
         return bank;
     }
 
@@ -112,7 +117,41 @@ public class BankBranche {
     public void setAddress(String address) {
         this.address = address;
     }
-//
+
+    public long getBrancheBalanceMDL() {
+        return brancheBalanceMDL;
+    }
+
+    public void setBrancheBalanceMDL(long brancheBalanceMDL) {
+        this.brancheBalanceMDL = brancheBalanceMDL;
+    }
+
+    public long getBrancheBalanceUSD() {
+        return brancheBalanceUSD;
+    }
+
+    public void setBrancheBalanceUSD(long brancheBalanceUSD) {
+        this.brancheBalanceUSD = brancheBalanceUSD;
+    }
+
+    public long getBrancheBalanceEUR() {
+        return brancheBalanceEUR;
+    }
+
+    public void setBrancheBalanceEUR(long brancheBalanceEUR) {
+        this.brancheBalanceEUR = brancheBalanceEUR;
+    }
+
+    public long getBrancheBalanceRON() {
+        return brancheBalanceRON;
+    }
+
+    public void setBrancheBalanceRON(long brancheBalanceRON) {
+        this.brancheBalanceRON = brancheBalanceRON;
+    }
+
+
+    //
 //    public void deposit(Currency currency, double amount) {
 //
 //        if (amount <= 0) {
@@ -169,4 +208,18 @@ public class BankBranche {
 //        }
 //    }
 
+    @Override
+    public String toString() {
+        return "BankBranche{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", BrancheBalanceMDL=" + brancheBalanceMDL +
+                ", BrancheBalanceUSD=" + brancheBalanceUSD +
+                ", BrancheBalanceEUR=" + brancheBalanceEUR +
+                ", brancheBalanceRON=" + brancheBalanceRON +
+                ", employees=" + employees +
+                ", clientList=" + clientList +
+                '}';
+    }
 }
