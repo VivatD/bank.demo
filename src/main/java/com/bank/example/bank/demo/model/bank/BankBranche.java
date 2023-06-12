@@ -29,7 +29,7 @@ public class BankBranche {
     @Column(name = "branche_ron")
     private long brancheBalanceRON;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "bank_id")
     private Bank bank;
     // @OneToMany(mappedBy = "bank_branche")

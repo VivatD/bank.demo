@@ -87,6 +87,11 @@ public class BankServiceImpl implements BankService {
 //    }
 
     @Override
+    public void calculateBrancheBalance() {
+        //TODO:Trebui de adaugat logica pentru a trimite catre filiala bani
+    }
+
+    @Override
     public void addBank(Bank bank) {
         System.out.println("service adding bank  central");
         bankRepository.save(bank);

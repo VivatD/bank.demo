@@ -12,6 +12,7 @@ public interface BankService {
 //    void deposit(double amount);
 //
 //    void withdraw(double amount);
+    void calculateBrancheBalance();
     void addBank(Bank bank);
     List<Bank> loadAllBank();
     List<Bank>  findBankByName(String bankName);
