@@ -30,7 +30,7 @@ public class Bank {
     @Column(name = "balance_RON")
     private long balanceRON;
 
-    @OneToMany
+    @OneToMany(mappedBy = "bank")
     private List<BankBranche> bankBrancheList = new ArrayList<>();
 
 //    private double balance;
@@ -143,24 +143,6 @@ public class Bank {
     public void setBalanceRON(long balanceRON) {
         this.balanceRON = balanceRON;
     }
-
-//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "bank")
-//    private BankBranche bankBranche;
-//
-//    public BankBranche getBankBranche() {
-//        return bankBranche;
-//    }
-//
-//    public void setBankBranch(BankBranche bankBranche) {
-//        this.bankBranche = bankBranche;
-//    }
-//
-//    public void deposit(Currency cur, double amount) {
-//    }
-//
-//    public void withdraw(Currency cur, double taxAmount) {
-//    }
-
 
     @Override
     public String toString() {

@@ -3,6 +3,7 @@ package com.bank.example.bank.demo.service.bankService;
 import com.bank.example.bank.demo.model.bank.Bank;
 import com.bank.example.bank.demo.model.bank.BankBranche;
 import com.bank.example.bank.demo.repository.BankRepository;
+import com.bank.example.bank.demo.service.bankBrancheService.BankBrancheService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,10 +87,6 @@ public class BankServiceImpl implements BankService {
 //        bank.withdraw(amount);
 //    }
 
-    @Override
-    public void calculateBrancheBalance() {
-        //TODO:Trebui de adaugat logica pentru a trimite catre filiala bani
-    }
 
     @Override
     public void addBank(Bank bank) {
@@ -104,21 +101,21 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    public  List<Bank>  findBankByName(String name)  {
+    public List<Bank> findBankByName(String name) {
         System.out.println("Service - Finding banks by name");
-        List<Bank>  bankList = new ArrayList<>();
+        List<Bank> bankList = new ArrayList<>();
         Bank bank = null;
         try {
-            bank =  bankRepository.findBankByName(name);
+            bank = bankRepository.findBankByName(name);
             bankList.add(bank);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return bankList;
     }
 
     @Override
-    public  List<Bank>  findBankByAddress(String address)  {
+    public List<Bank> findBankByAddress(String address) {
         System.out.println("Service - Finding banks by address");
         List<Bank> bankList = new ArrayList<>();
         Bank bankAddres = null;
@@ -126,7 +123,7 @@ public class BankServiceImpl implements BankService {
         try {
             bankAddres = bankRepository.findBankByAddress(address);
             bankList.add(bankAddres);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
         return bankList;
@@ -162,6 +159,65 @@ public class BankServiceImpl implements BankService {
         bankRepository.save(existingBank);
     }
 
+    @Override
+    public void sendMoneyToBranch(long idBank) {
+        System.out.println("se trimit bani catre filiala");
+        //logica pentru a trimite bani catre filiala
+
+        List<BankBranche> arrayListBankBrach = new ArrayList<>();
+        Bank bank = getBankById(idBank);
+        arrayListBankBrach = bank.getBankBrancheList();
+
+        for (BankBranche branche : arrayListBankBrach) {
+
+            branche.setBrancheBalanceRON((long) (bank.getBalanceRON() * 0.00185));
+            bank.setBalanceRON(bank.getBalanceRON() - branche.getBrancheBalanceRON());
+
+            branche.setBrancheBalanceUSD((long) (bank.getBalanceUSD() * 0.001));
+            bank.setBalanceUSD(bank.getBalanceUSD() - branche.getBrancheBalanceUSD());
+
+            branche.setBrancheBalanceEUR((long) (bank.getBalanceEUR() * 0.001));
+            bank.setBalanceEUR(bank.getBalanceEUR() - branche.getBrancheBalanceEUR());
+
+            branche.setBrancheBalanceMDL((long) (bank.getBalanceMDL() * 0.001));
+            bank.setBalanceMDL(bank.getBalanceMDL() - branche.getBrancheBalanceMDL());
+
+            System.out.println("brache is " + branche.toString());
+
+        }
+
+
+    }
+
+    @Override
+    public void receiveMoneyFromBranch(long idBank) {
+        System.out.println("se iau bani de la filiala");
+        //logica pentru a primi de bani la filiala
+
+        List<BankBranche> arrayListBankBrach = new ArrayList<>();
+        Bank bank = getBankById(idBank);
+        arrayListBankBrach = bank.getBankBrancheList();
+
+        for (BankBranche branche : arrayListBankBrach) {
+
+            bank.setBalanceRON(bank.getBalanceRON() + branche.getBrancheBalanceRON());
+            branche.setBrancheBalanceRON(0);
+
+            bank.setBalanceMDL(bank.getBalanceMDL() + branche.getBrancheBalanceMDL());
+            branche.setBrancheBalanceMDL(0);
+
+            bank.setBalanceEUR(bank.getBalanceEUR() + branche.getBrancheBalanceEUR());
+            branche.setBrancheBalanceEUR(0);
+
+            bank.setBalanceUSD(bank.getBalanceUSD() + branche.getBrancheBalanceUSD());
+            branche.setBrancheBalanceUSD(0);
+
+            System.out.println("brache is " + branche.toString());
+
+        }
+
+
+    }
 }
 
 

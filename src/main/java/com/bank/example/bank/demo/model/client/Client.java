@@ -27,7 +27,7 @@ public class Client {
     @Column(name = "amount_currency")
     private long amountCurrency;
     @ManyToOne
-   @JoinColumn(name = "bank_branche_id")
+    @JoinColumn(name = "bank_branche_id")
     private BankBranche bankBranche;
 
     public Client() {
