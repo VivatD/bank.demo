@@ -32,6 +32,14 @@ public class ExchangeCurrency {
         this.date = date;
     }
 
+    public ExchangeCurrency(long MDL, long USD, long EUR, long RON, Date date) {
+        this.MDL = MDL;
+        this.USD = USD;
+        this.EUR = EUR;
+        this.RON = RON;
+        this.date = date;
+    }
+
     public long getIdExchangeCurrency() {
         return idExchangeCurrency;
     }
@@ -80,5 +88,15 @@ public class ExchangeCurrency {
         this.date = date;
     }
 
-    
+    @Override
+    public String toString() {
+        return "ExchangeCurrency{" +
+                "idExchangeCurrency=" + idExchangeCurrency +
+                ", MDL=" + MDL +
+                ", USD=" + USD +
+                ", EUR=" + EUR +
+                ", RON=" + RON +
+                ", date=" + date +
+                '}';
+    }
 }
