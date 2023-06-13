@@ -24,6 +24,27 @@ public class Employees {
     @JoinColumn(name = "bank_branche_id")
     private BankBranche bankBranche;
 
+    public Employees() {
+    }
+
+    public Employees(String firstName, String lastName, String mobileNumber, EmployeeFunction function,
+                     BankBranche bankBranche) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.mobileNumber = mobileNumber;
+        this.function = function;
+        this.bankBranche = bankBranche;
+    }
+
+    public Employees(long id, String firstName, String lastName, String mobileNumber, EmployeeFunction function,
+                     BankBranche bankBranche) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.mobileNumber = mobileNumber;
+        this.function = function;
+        this.bankBranche = bankBranche;
+    }
 
     public long getId() {
         return id;
@@ -63,5 +84,17 @@ public class Employees {
 
     public void setFunction(EmployeeFunction function) {
         this.function = function;
+    }
+
+    @Override
+    public String toString() {
+        return "Employees{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", function=" + function +
+                ", bankBranche=" + bankBranche +
+                '}';
     }
 }

@@ -13,7 +13,7 @@ public class BankBranche {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bank_branche_id")
+    @Column(name = "branche_id")
     private long id;
     @Column(name = "branche_name")
     private String name;
@@ -70,13 +70,27 @@ public class BankBranche {
         this.clientList = clientList;
     }
 
-        public Bank getBank() {
+    public BankBranche(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    public BankBranche(String name, String address, Bank bank, List<Employees> employees, List<Client> clientList) {
+        this.name = name;
+        this.address = address;
+        this.bank = bank;
+        this.employees = employees;
+        this.clientList = clientList;
+    }
+
+    public Bank getBank() {
         return bank;
     }
 
     public void setBank(Bank bank) {
         this.bank = bank;
     }
+
 
     public List<Employees> getEmployees() {
         return employees;

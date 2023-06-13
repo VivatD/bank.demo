@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface BankBrancheService {
-    void openBranch();
+
     void addBankBranche(BankBranche bankBranche);
     List<BankBranche> loadAllBankBranche();
     List<BankBranche> findBankBrancheByName(String name);
@@ -17,6 +17,6 @@ public interface BankBrancheService {
     void updateBankBranche(BankBranche bankBranche);
 
     void changeMoney(Client client, BankBranche bankBranche);
-    void sendMoney(Client client, BankBranche bankBranche);
-    void receiveMoney(Client client, BankBranche bankBranche);
+    void sendMoney(Client sendClient, BankBranche sendBankBranche, Client reciveClient, BankBranche receveBankBranke);
+    void receiveMoney(Client reciveClient, BankBranche receveBankBranke, Client sendClient, BankBranche sendBankBranche);
 }

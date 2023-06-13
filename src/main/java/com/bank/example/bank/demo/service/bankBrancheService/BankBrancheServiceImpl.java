@@ -21,13 +21,7 @@ public class BankBrancheServiceImpl implements BankBrancheService {
     @Autowired
     private BankBranchRepository bankBranchRepository;
 
-    @Override
-    public void openBranch() {
-        BankService bankService = null;
-        Bank bank = bankService.getBankById(9);
-        bank.getBalanceMDL();
 
-    }
 
     @Override
     public void addBankBranche(BankBranche bankBranche) {
@@ -107,12 +101,14 @@ public class BankBrancheServiceImpl implements BankBrancheService {
     }
 
     @Override
-    public void sendMoney(Client client, BankBranche bankBranche) {
-        //TODO: sendMoney
+    public void sendMoney(Client sendClient, BankBranche sendBankBranche, Client reciveClient, BankBranche receveBankBranke) {
+
     }
 
     @Override
-    public void receiveMoney(Client client, BankBranche bankBranche) {
-        //TODO: receiveMoney
+    public void receiveMoney(Client reciveClient, BankBranche receveBankBranke, Client sendClient, BankBranche sendBankBranche) {
+
     }
+
+
 }

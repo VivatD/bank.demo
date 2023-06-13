@@ -31,23 +31,32 @@ public class BankController {
     }
 
     @GetMapping("/address/{bankAddress}")
-    public List<Bank> findBankByAddress(@PathVariable  String bankAddress) {
+    public List<Bank> findBankByAddress(@PathVariable String bankAddress) {
         return bankService.findBankByAddress(bankAddress);
     }
 
     @GetMapping("/id/{id}")
-    Bank getBankByID(@PathVariable long id){
+    Bank getBankByID(@PathVariable long id) {
         return bankService.getBankById(id);
     }
 
     @DeleteMapping("/id/{id}")
-    void deleteBankByID(@PathVariable long id){
+    void deleteBankByID(@PathVariable long id) {
         bankService.deleteBankByID(id);
     }
 
     @PutMapping("/update")
-    void updateBank(@RequestBody Bank bank){
+    void updateBank(@RequestBody Bank bank) {
         bankService.updateBank(bank);
     }
+    @GetMapping("/send/branch/{idBank}")
+    void sendMoneyToBranche(@PathVariable long idBank){
+        bankService.sendMoneyToBranch(idBank);
+    }
+    @GetMapping("/receive/branch/{idBank}")
+    void receiveMoneyFromBranche(@PathVariable long idBank){
+        bankService.receiveMoneyFromBranch(idBank);
+    }
+
 
 }
