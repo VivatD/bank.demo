@@ -2,6 +2,7 @@ package com.bank.example.bank.demo.service.bankBrancheService;
 
 import com.bank.example.bank.demo.model.bank.Bank;
 import com.bank.example.bank.demo.model.bank.BankBranche;
+import com.bank.example.bank.demo.model.client.Client;
 import com.bank.example.bank.demo.repository.BankBranchRepository;
 import com.bank.example.bank.demo.repository.BankRepository;
 import com.bank.example.bank.demo.service.bankService.BankService;
@@ -98,5 +99,20 @@ public class BankBrancheServiceImpl implements BankBrancheService {
         existingBankBranche.setBrancheBalanceRON(bankBranche.getBrancheBalanceRON());
 
         bankBranchRepository.save(existingBankBranche);
+    }
+
+    @Override
+    public void changeMoney(Client client, BankBranche bankBranche) {
+        //TODO: changeMoney
+    }
+
+    @Override
+    public void sendMoney(Client client, BankBranche bankBranche) {
+        //TODO: sendMoney
+    }
+
+    @Override
+    public void receiveMoney(Client client, BankBranche bankBranche) {
+        //TODO: receiveMoney
     }
 }
