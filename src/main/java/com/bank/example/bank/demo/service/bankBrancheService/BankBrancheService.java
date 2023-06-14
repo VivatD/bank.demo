@@ -4,6 +4,7 @@ import com.bank.example.bank.demo.model.bank.BankBranche;
 import com.bank.example.bank.demo.model.client.Client;
 
 import java.sql.SQLException;
+import java.util.Currency;
 import java.util.List;
 
 public interface BankBrancheService {
@@ -16,7 +17,7 @@ public interface BankBrancheService {
     void deleteBankBrancheByID(long id);
     void updateBankBranche(BankBranche bankBranche);
 
-    void changeMoney(Client client, BankBranche bankBranche);
+    void changeMoney(Client client, Currency toCurrency, BankBranche bankBranche);
     void sendMoney(Client sendClient, BankBranche sendBankBranche, Client reciveClient, BankBranche receveBankBranke);
     void receiveMoney(Client reciveClient, BankBranche receveBankBranke, Client sendClient, BankBranche sendBankBranche);
 }

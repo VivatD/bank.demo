@@ -1,4 +1,4 @@
-package com.bank.example.bank.demo.service.ClientService;
+package com.bank.example.bank.demo.service.clientService;
 
 import com.bank.example.bank.demo.model.client.Client;
 

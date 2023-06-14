@@ -170,7 +170,7 @@ public class BankServiceImpl implements BankService {
 
         for (BankBranche branche : arrayListBankBrach) {
 
-            branche.setBrancheBalanceRON((long) (bank.getBalanceRON() * 0.00185));
+            branche.setBrancheBalanceRON((long) (bank.getBalanceRON() * 0.001));
             bank.setBalanceRON(bank.getBalanceRON() - branche.getBrancheBalanceRON());
 
             branche.setBrancheBalanceUSD((long) (bank.getBalanceUSD() * 0.001));

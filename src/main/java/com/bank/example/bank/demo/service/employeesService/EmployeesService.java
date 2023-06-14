@@ -1,4 +1,4 @@
-package com.bank.example.bank.demo.service.EmployeesService;
+package com.bank.example.bank.demo.service.employeesService;
 
 import com.bank.example.bank.demo.model.employee.EmployeeFunction;
 import com.bank.example.bank.demo.model.employee.Employees;
