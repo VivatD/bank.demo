@@ -3,16 +3,21 @@ package com.bank.example.bank.demo.service.bankBrancheService;
 import com.bank.example.bank.demo.model.bank.Bank;
 import com.bank.example.bank.demo.model.bank.BankBranche;
 import com.bank.example.bank.demo.model.client.Client;
+import com.bank.example.bank.demo.model.client.TypeClient;
+import com.bank.example.bank.demo.model.employee.EmployeeFunction;
+import com.bank.example.bank.demo.model.employee.Employees;
 import com.bank.example.bank.demo.repository.BankBranchRepository;
 import com.bank.example.bank.demo.repository.BankRepository;
 import com.bank.example.bank.demo.service.bankService.BankService;
 import com.bank.example.bank.demo.service.bankService.BankServiceImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 @Service
@@ -96,7 +101,62 @@ public class BankBrancheServiceImpl implements BankBrancheService {
     }
 
     @Override
-    public void changeMoney(Client client, BankBranche bankBranche) {
+    public void changeMoney(Client client, Currency toCurrency, BankBranche bankBranche) {
+        List<Employees> employeesList = bankBranche.getEmployees();
+
+        for (Employees employees : employeesList ){
+            if (employees.getFunction().equals(EmployeeFunction.CASIER)){
+                System.out.println("se deservest de ");
+                if(client.getTypeClient().equals(TypeClient.CHANGE)){
+                    // MDL --> all
+                    if(client.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.MDL)
+                            && toCurrency.equals(com.bank.example.bank.demo.model.currency.Currency.EUR)){
+                        //TODO:
+                    }
+
+                    if(client.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.MDL)
+                            && toCurrency.equals(com.bank.example.bank.demo.model.currency.Currency.USD)){
+                        //TODO:
+                    }
+                    if(client.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.MDL)
+                            && toCurrency.equals(com.bank.example.bank.demo.model.currency.Currency.RON)){
+                        //TODO:
+                    }
+                    // EUR --> all
+                    if(client.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.EUR)
+                            && toCurrency.equals(com.bank.example.bank.demo.model.currency.Currency.MDL)){
+                        //TODO:
+                    }
+
+                    if(client.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.EUR)
+                            && toCurrency.equals(com.bank.example.bank.demo.model.currency.Currency.USD)){
+                        //TODO:
+                    }
+
+                    if(client.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.EUR)
+                            && toCurrency.equals(com.bank.example.bank.demo.model.currency.Currency.RON)){
+                        //TODO:
+                    }
+                    //USD --> all
+                    if(client.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.USD)
+                            && toCurrency.equals(com.bank.example.bank.demo.model.currency.Currency.MDL)){
+                        //TODO:
+                    }
+
+                    if(client.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.USD)
+                            && toCurrency.equals(com.bank.example.bank.demo.model.currency.Currency.EUR)){
+                        //TODO:
+                    }
+
+                    if(client.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.USD)
+                            && toCurrency.equals(com.bank.example.bank.demo.model.currency.Currency.RON)){
+                        //TODO:
+                    }
+
+                }
+            }
+        }
+
         //TODO: changeMoney
     }
 

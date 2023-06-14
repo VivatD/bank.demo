@@ -1,7 +1,7 @@
 package com.bank.example.bank.demo.controller;
 
 import com.bank.example.bank.demo.model.client.Client;
-import com.bank.example.bank.demo.service.ClientService.ClientService;
+import com.bank.example.bank.demo.service.clientService.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

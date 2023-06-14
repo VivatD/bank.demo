@@ -3,17 +3,20 @@ package com.bank.example.bank.demo.model.currency;
 import com.bank.example.bank.demo.model.bank.BankBranche;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "ExchangeCurrency")
 public class ExchangeCurrency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idExchangeCurrency;
-    @Column(name = "sellMDL")
-    private long sellMDL;
-    @Column(name = "buyMDL")
-    private long buyMDL;
+//    @Column(name = "sellMDL")
+//    private long sellMDL;
+//    @Column(name = "buyMDL")
+//    private long buyMDL;
     @Column(name = "sellUSD")
     private long sellUSD;
     @Column(name = "buyUSD")
@@ -26,41 +29,40 @@ public class ExchangeCurrency {
     private long sellRON;
     @Column(name = "buyRON")
     private long buyRON;
-    @OneToOne
-    @JoinColumn(name = "idExchangeCurrency", referencedColumnName = "branche_id")
-    private BankBranche bankBranche;
+    @OneToMany
+    private List<BankBranche> bankBrancheList = new ArrayList<>();
     @Column(name = "date")
     private Date date;
 
     public ExchangeCurrency() {
     }
 
-    public ExchangeCurrency(long idExchangeCurrency, long sellMDL, long buyMDL, long sellUSD, long buyUSD,
-                            long sellEUR, long buyEUR, long sellRON, long buyRON, BankBranche bankBranche, Date date) {
+    public ExchangeCurrency(long idExchangeCurrency, long sellUSD, long buyUSD, long sellEUR, long buyEUR,
+                            long sellRON, long buyRON, List<BankBranche> bankBrancheList, Date date) {
         this.idExchangeCurrency = idExchangeCurrency;
-        this.sellMDL = sellMDL;
-        this.buyMDL = buyMDL;
+//        this.sellMDL = sellMDL;
+//        this.buyMDL = buyMDL;
         this.sellUSD = sellUSD;
         this.buyUSD = buyUSD;
         this.sellEUR = sellEUR;
         this.buyEUR = buyEUR;
         this.sellRON = sellRON;
         this.buyRON = buyRON;
-        this.bankBranche = bankBranche;
+        this.bankBrancheList = bankBrancheList;
         this.date = date;
     }
 
-    public ExchangeCurrency(long sellMDL, long buyMDL, long sellUSD, long buyUSD, long sellEUR, long buyEUR,
-                            long sellRON, long buyRON, BankBranche bankBranche, Date date) {
-        this.sellMDL = sellMDL;
-        this.buyMDL = buyMDL;
+    public ExchangeCurrency(long sellUSD, long buyUSD, long sellEUR, long buyEUR,
+                            long sellRON, long buyRON, List<BankBranche> bankBrancheList, Date date) {
+//        this.sellMDL = sellMDL;
+//        this.buyMDL = buyMDL;
         this.sellUSD = sellUSD;
         this.buyUSD = buyUSD;
         this.sellEUR = sellEUR;
         this.buyEUR = buyEUR;
         this.sellRON = sellRON;
         this.buyRON = buyRON;
-        this.bankBranche = bankBranche;
+        this.bankBrancheList = bankBrancheList;
         this.date = date;
     }
 
@@ -72,21 +74,21 @@ public class ExchangeCurrency {
         this.idExchangeCurrency = idExchangeCurrency;
     }
 
-    public long getSellMDL() {
-        return sellMDL;
-    }
-
-    public void setSellMDL(long sellMDL) {
-        this.sellMDL = sellMDL;
-    }
-
-    public long getBuyMDL() {
-        return buyMDL;
-    }
-
-    public void setBuyMDL(long buyMDL) {
-        this.buyMDL = buyMDL;
-    }
+//    public long getSellMDL() {
+//        return sellMDL;
+//    }
+//
+//    public void setSellMDL(long sellMDL) {
+//        this.sellMDL = sellMDL;
+//    }
+//
+//    public long getBuyMDL() {
+//        return buyMDL;
+//    }
+//
+//    public void setBuyMDL(long buyMDL) {
+//        this.buyMDL = buyMDL;
+//    }
 
     public long getSellUSD() {
         return sellUSD;
@@ -144,27 +146,27 @@ public class ExchangeCurrency {
         this.date = date;
     }
 
-    public BankBranche getBankBranche() {
-        return bankBranche;
+    public List<BankBranche> getBankBrancheList() {
+        return bankBrancheList;
     }
 
-    public void setBankBranche(BankBranche bankBranche) {
-        this.bankBranche = bankBranche;
+    public void setBankBrancheList(List<BankBranche> bankBrancheList) {
+        this.bankBrancheList = bankBrancheList;
     }
 
     @Override
     public String toString() {
         return "ExchangeCurrency{" +
                 "idExchangeCurrency=" + idExchangeCurrency +
-                ", sellMDL=" + sellMDL +
-                ", buyMDL=" + buyMDL +
+//                ", sellMDL=" + sellMDL +
+//                ", buyMDL=" + buyMDL +
                 ", sellUSD=" + sellUSD +
                 ", buyUSD=" + buyUSD +
                 ", sellEUR=" + sellEUR +
                 ", buyEUR=" + buyEUR +
                 ", sellRON=" + sellRON +
                 ", buyRON=" + buyRON +
-                ", bankBranche=" + bankBranche +
+                ", bankBranche=" + bankBrancheList +
                 ", date=" + date +
                 '}';
     }

@@ -1,6 +1,7 @@
 package com.bank.example.bank.demo.model.bank;
 
 import com.bank.example.bank.demo.model.client.Client;
+import com.bank.example.bank.demo.model.currency.ExchangeCurrency;
 import com.bank.example.bank.demo.model.employee.Employees;
 import jakarta.persistence.*;
 
@@ -32,13 +33,15 @@ public class BankBranche {
     @ManyToOne
     @JoinColumn(name = "bank_id")
     private Bank bank;
-    // @OneToMany(mappedBy = "bank_branche")
     @OneToMany
     private List<Employees> employees = new ArrayList<>();
 
-    //@OneToMany(mappedBy = "bankbranch", cascade = CascadeType.ALL)
     @OneToMany
     private List<Client> clientList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "idExchangeCurrency")
+    private  ExchangeCurrency exchangeCurrency;
+   // private List<ExchangeCurrency> exchangeCurrencyList = new ArrayList<>();
 
 
     public BankBranche() {
@@ -46,7 +49,8 @@ public class BankBranche {
     }
 
     public BankBranche(long id, String name, String address, long brancheBalanceMDL, long brancheBalanceUSD,
-                       long brancheBalanceEUR, long brancheBalanceRON, List<Employees> employees, List<Client> clientList) {
+                       long brancheBalanceEUR, long brancheBalanceRON, List<Employees> employees,
+                       List<Client> clientList, ExchangeCurrency exchangeCurrency) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -56,10 +60,12 @@ public class BankBranche {
         this.brancheBalanceRON = brancheBalanceRON;
         this.employees = employees;
         this.clientList = clientList;
+        this.exchangeCurrency = exchangeCurrency;
     }
 
     public BankBranche(String name, String address, long brancheBalanceMDL, long brancheBalanceUSD,
-                       long brancheBalanceEUR, long brancheBalanceRON, List<Employees> employees, List<Client> clientList) {
+                       long brancheBalanceEUR, long brancheBalanceRON, List<Employees> employees,
+                       List<Client> clientList, ExchangeCurrency exchangeCurrency) {
         this.name = name;
         this.address = address;
         this.brancheBalanceMDL = brancheBalanceMDL;
@@ -68,6 +74,7 @@ public class BankBranche {
         this.brancheBalanceRON = brancheBalanceRON;
         this.employees = employees;
         this.clientList = clientList;
+        this.exchangeCurrency = exchangeCurrency;
     }
 
     public BankBranche(String name, String address) {
@@ -85,6 +92,14 @@ public class BankBranche {
 
     public Bank getBank() {
         return bank;
+    }
+
+    public ExchangeCurrency getExchangeCurrency() {
+        return exchangeCurrency;
+    }
+
+    public void setExchangeCurrency(ExchangeCurrency exchangeCurrency) {
+        this.exchangeCurrency = exchangeCurrency;
     }
 
     public void setBank(Bank bank) {
@@ -222,18 +237,21 @@ public class BankBranche {
 //        }
 //    }
 
+
     @Override
     public String toString() {
         return "BankBranche{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
-                ", BrancheBalanceMDL=" + brancheBalanceMDL +
-                ", BrancheBalanceUSD=" + brancheBalanceUSD +
-                ", BrancheBalanceEUR=" + brancheBalanceEUR +
+                ", brancheBalanceMDL=" + brancheBalanceMDL +
+                ", brancheBalanceUSD=" + brancheBalanceUSD +
+                ", brancheBalanceEUR=" + brancheBalanceEUR +
                 ", brancheBalanceRON=" + brancheBalanceRON +
+                ", bank=" + bank +
                 ", employees=" + employees +
                 ", clientList=" + clientList +
+                ", exchangeCurrency=" + exchangeCurrency +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package com.bank.example.bank.demo.service.EmployeesService;
+package com.bank.example.bank.demo.service.employeesService;
 
 import com.bank.example.bank.demo.model.employee.EmployeeFunction;
 import com.bank.example.bank.demo.model.employee.Employees;
@@ -15,13 +15,14 @@ public class EmployeesServiceImpl implements EmployeesService {
     private EmployeesRepository employeesRepository;
     @Override
     public void addEmployees(Employees employees) {
-        //TODO: Logica trebuie
+        System.out.println("service add client");
+        employeesRepository.save(employees);
     }
 
     @Override
     public List<Employees> loadAllEmployees() {
-        //TODO: Logica trebuie
-        return null;
+        System.out.println("service load all employees");
+        return employeesRepository.findAll();
     }
 
     @Override
