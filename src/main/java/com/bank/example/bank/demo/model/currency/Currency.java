@@ -2,9 +2,10 @@ package com.bank.example.bank.demo.model.currency;
 
 public enum Currency {
 
-    EUR,
+    EUR ,
     MDL,
     USD,
-    RON
+    RON;
 
 }
+

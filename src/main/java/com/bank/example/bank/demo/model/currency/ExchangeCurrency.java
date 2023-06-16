@@ -18,17 +18,17 @@ public class ExchangeCurrency {
 //    @Column(name = "buyMDL")
 //    private long buyMDL;
     @Column(name = "sellUSD")
-    private long sellUSD;
+    private double sellUSD;
     @Column(name = "buyUSD")
-    private long buyUSD;
+    private double buyUSD;
     @Column(name = "sellEUR")
-    private long sellEUR;
+    private double sellEUR;
     @Column(name = "buyEUR")
-    private long buyEUR;
+    private double buyEUR;
     @Column(name = "sellRON")
-    private long sellRON;
+    private double sellRON;
     @Column(name = "buyRON")
-    private long buyRON;
+    private double buyRON;
     @OneToMany
     private List<BankBranche> bankBrancheList = new ArrayList<>();
     @Column(name = "date")
@@ -37,8 +37,8 @@ public class ExchangeCurrency {
     public ExchangeCurrency() {
     }
 
-    public ExchangeCurrency(long idExchangeCurrency, long sellUSD, long buyUSD, long sellEUR, long buyEUR,
-                            long sellRON, long buyRON, List<BankBranche> bankBrancheList, Date date) {
+    public ExchangeCurrency(long idExchangeCurrency, double sellUSD, double buyUSD, double sellEUR, double buyEUR,
+                            double sellRON, double buyRON, List<BankBranche> bankBrancheList, Date date) {
         this.idExchangeCurrency = idExchangeCurrency;
 //        this.sellMDL = sellMDL;
 //        this.buyMDL = buyMDL;
@@ -52,8 +52,8 @@ public class ExchangeCurrency {
         this.date = date;
     }
 
-    public ExchangeCurrency(long sellUSD, long buyUSD, long sellEUR, long buyEUR,
-                            long sellRON, long buyRON, List<BankBranche> bankBrancheList, Date date) {
+    public ExchangeCurrency(float sellUSD, double buyUSD, double sellEUR, double buyEUR,
+                            double sellRON, double buyRON, List<BankBranche> bankBrancheList, Date date) {
 //        this.sellMDL = sellMDL;
 //        this.buyMDL = buyMDL;
         this.sellUSD = sellUSD;
@@ -90,7 +90,7 @@ public class ExchangeCurrency {
 //        this.buyMDL = buyMDL;
 //    }
 
-    public long getSellUSD() {
+    public double getSellUSD() {
         return sellUSD;
     }
 
@@ -98,7 +98,7 @@ public class ExchangeCurrency {
         this.sellUSD = sellUSD;
     }
 
-    public long getBuyUSD() {
+    public double getBuyUSD() {
         return buyUSD;
     }
 
@@ -106,7 +106,7 @@ public class ExchangeCurrency {
         this.buyUSD = buyUSD;
     }
 
-    public long getSellEUR() {
+    public double getSellEUR() {
         return sellEUR;
     }
 
@@ -114,7 +114,7 @@ public class ExchangeCurrency {
         this.sellEUR = sellEUR;
     }
 
-    public long getBuyEUR() {
+    public double getBuyEUR() {
         return buyEUR;
     }
 
@@ -122,7 +122,7 @@ public class ExchangeCurrency {
         this.buyEUR = buyEUR;
     }
 
-    public long getSellRON() {
+    public double getSellRON() {
         return sellRON;
     }
 
@@ -130,7 +130,7 @@ public class ExchangeCurrency {
         this.sellRON = sellRON;
     }
 
-    public long getBuyRON() {
+    public double getBuyRON() {
         return buyRON;
     }
 
