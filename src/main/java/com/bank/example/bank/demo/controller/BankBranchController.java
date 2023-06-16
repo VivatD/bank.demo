@@ -2,10 +2,12 @@ package com.bank.example.bank.demo.controller;
 
 import com.bank.example.bank.demo.model.bank.Bank;
 import com.bank.example.bank.demo.model.bank.BankBranche;
+import com.bank.example.bank.demo.model.client.Client;
 import com.bank.example.bank.demo.service.bankBrancheService.BankBrancheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Currency;
 import java.util.List;
 
 @RestController
@@ -35,19 +37,37 @@ public class BankBranchController {
     }
 
     @GetMapping("/id/{id}")
-    BankBranche getBankBrancheByID(@PathVariable long id) {
+    public  BankBranche getBankBrancheByID(@PathVariable long id) {
         return bankBrancheService.getBankBrancheByID(id);
     }
 
     @DeleteMapping("/id/{id}")
-    void deleteBankBrancheByID(@PathVariable long id) {
+    public  void deleteBankBrancheByID(@PathVariable long id) {
         bankBrancheService.deleteBankBrancheByID(id);
     }
 
     @PutMapping("/update")
-    void updateBankBrache(@RequestBody BankBranche bankBranche) {
+    public  void updateBankBrache(@RequestBody BankBranche bankBranche) {
         bankBrancheService.updateBankBranche(bankBranche);
     }
+    @PostMapping("/change/money/{toCurrency}")
+    public void changeMoney(@RequestBody Client client,@PathVariable Currency toCurrency,
+                            @RequestBody BankBranche bankBranche){
+        bankBrancheService.changeMoney(client,toCurrency,bankBranche);
+    }
 
+    @GetMapping("/change/money/{idClient}/{toCurrency}/{idBankBranche}/{idEmployee}")
+    public void changeMoneyService(@PathVariable long idClient, @PathVariable  Currency toCurrency,
+                                   @PathVariable long idBankBranche, @PathVariable  long idEmployee){
+        bankBrancheService.changeMoneyService(idClient,toCurrency, idBankBranche, idEmployee);
+    }
+
+    @GetMapping("/send/money/sc_{idSendClient}/sb_{idSendBankBranche}/se_{idEmployeeFromSendBankBranche}/rc_{idReciveClient}/rb_{idReceveBankBranke}")
+    public void sendMoneyService(@PathVariable long idSendClient, @PathVariable  long idSendBankBranche,
+                                 @PathVariable long idEmployeeFromSendBankBranche, @PathVariable  long idReciveClient,
+                                 @PathVariable long idReceveBankBranke ){
+        bankBrancheService.sendMoney(idSendClient, idSendBankBranche, idEmployeeFromSendBankBranche,
+                idReciveClient, idReceveBankBranke);
+    }
 
 }

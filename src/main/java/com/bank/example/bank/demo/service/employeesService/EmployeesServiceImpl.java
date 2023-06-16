@@ -51,8 +51,8 @@ public class EmployeesServiceImpl implements EmployeesService {
 
     @Override
     public Employees findEmployeesByID(long id) {
-        //TODO: Logica trebuie
-        return null;
+        System.out.println("Service to find employee by id");
+        return employeesRepository.findEmployeesById(id);
     }
 
     @Override
