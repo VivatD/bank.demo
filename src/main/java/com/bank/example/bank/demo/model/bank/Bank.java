@@ -1,5 +1,6 @@
 package com.bank.example.bank.demo.model.bank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class Bank {
     @Column(name = "balance_RON")
     private long balanceRON;
 
+  //  @JsonIgnore
     @OneToMany(mappedBy = "bank")
     private List<BankBranche> bankBrancheList = new ArrayList<>();
 

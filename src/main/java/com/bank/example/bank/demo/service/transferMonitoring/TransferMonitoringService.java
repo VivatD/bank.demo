@@ -5,5 +5,5 @@ import com.bank.example.bank.demo.model.bank.TransferMonitoring;
 public interface TransferMonitoringService {
 
     void  addTransferMonitoring(TransferMonitoring transferMonitoring);
-    void findTransferMonitoringById(long id);
+    TransferMonitoring findTransferMonitoringById(long id);
 }

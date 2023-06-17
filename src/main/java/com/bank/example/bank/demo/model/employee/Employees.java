@@ -1,6 +1,7 @@
 package com.bank.example.bank.demo.model.employee;
 
 import com.bank.example.bank.demo.model.bank.BankBranche;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,7 +20,7 @@ public class Employees {
     private String mobileNumber;
     @Column(name = "employee_function")
     private EmployeeFunction function;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "bank_branche_id")
     private BankBranche bankBranche;

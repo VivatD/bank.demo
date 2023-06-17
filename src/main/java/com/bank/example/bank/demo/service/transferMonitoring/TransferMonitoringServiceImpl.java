@@ -17,7 +17,7 @@ public class TransferMonitoringServiceImpl implements TransferMonitoringService 
     }
 
     @Override
-    public void findTransferMonitoringById(long id) {
-        transferMonitoringRepository.findById(id);
+    public TransferMonitoring findTransferMonitoringById(long id) {
+      return  transferMonitoringRepository.findById(id).orElse(null);
     }
 }

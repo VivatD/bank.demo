@@ -2,6 +2,7 @@ package com.bank.example.bank.demo.service.bankBrancheService;
 
 import com.bank.example.bank.demo.model.bank.Bank;
 import com.bank.example.bank.demo.model.bank.BankBranche;
+import com.bank.example.bank.demo.model.bank.MoneyStatus;
 import com.bank.example.bank.demo.model.bank.TransferMonitoring;
 import com.bank.example.bank.demo.model.client.Client;
 import com.bank.example.bank.demo.model.client.TypeClient;
@@ -109,33 +110,33 @@ public class BankBrancheServiceImpl implements BankBrancheService {
     @Override
     public void changeMoney(Client client, Currency toCurrency, BankBranche bankBranche) {
 
-        List<Employees> employeesList = bankBranche.getEmployees();
-
-        ExchangeCurrency exchangeCurrency = bankBranche.getExchangeCurrency();
-
-        for (Employees employees : employeesList) {
-            System.out.println(employees + " my employee is");
-            if (employees.getFunction().equals(EmployeeFunction.CASIER)) {
-                System.out.println("se deservest de ");
-                if (client.getTypeClient().equals(TypeClient.CHANGE)) {
-                    // MDL --> all
-                    if (client.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.MDL)
-                            && toCurrency.equals(com.bank.example.bank.demo.model.currency.Currency.EUR)) {
-
-                        bankBranche.setBrancheBalanceMDL(bankBranche.getBrancheBalanceMDL() + client.getAmountCurrency());
-                        double changedMoney = client.getAmountCurrency() * exchangeCurrency.getBuyEUR();
-                        client.setTypeCurrensy(com.bank.example.bank.demo.model.currency.Currency.EUR);
-                        bankBranche.setBrancheBalanceEUR((long) (bankBranche.getBrancheBalanceEUR() - (changedMoney - 0.99)));
-                        client.setAmountCurrency((long) (changedMoney - (changedMoney * 0.01))); // comisionul
-
-
-                        System.out.println("================================================\n" + changedMoney);
-                        //TODO:
-                    }
-
-                }
-            }
-        }
+//        List<Employees> employeesList = bankBranche.getEmployees();
+//
+//        ExchangeCurrency exchangeCurrency = bankBranche.getExchangeCurrency();
+//
+//        for (Employees employees : employeesList) {
+//            System.out.println(employees + " my employee is");
+//            if (employees.getFunction().equals(EmployeeFunction.CASIER)) {
+//                System.out.println("se deservest de ");
+//                if (client.getTypeClient().equals(TypeClient.CHANGE)) {
+//                    // MDL --> all
+//                    if (client.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.MDL)
+//                            && toCurrency.equals(com.bank.example.bank.demo.model.currency.Currency.EUR)) {
+//
+//                        bankBranche.setBrancheBalanceMDL(bankBranche.getBrancheBalanceMDL() + client.getAmountCurrency());
+//                        double changedMoney = client.getAmountCurrency() * exchangeCurrency.getBuyEUR();
+//                        client.setTypeCurrensy(com.bank.example.bank.demo.model.currency.Currency.EUR);
+//                        bankBranche.setBrancheBalanceEUR((long) (bankBranche.getBrancheBalanceEUR() - (changedMoney - 0.99)));
+//                        client.setAmountCurrency((long) (changedMoney - (changedMoney * 0.01))); // comisionul
+//
+//
+//                        System.out.println("================================================\n" + changedMoney);
+//                        //TODO:
+//                    }
+//
+//                }
+//            }
+//        }
 
         //TODO: changeMoney
     }
@@ -198,60 +199,90 @@ public class BankBrancheServiceImpl implements BankBrancheService {
             }
         }
     }
+
     @Autowired
     private TransferMonitoringService transferMonitoringService;
+
     @Override
-    public void sendMoney(long idSendClient, long  idSendBankBranche, long idEmployeeFromSendBankBranche,
-                          long idReciveClient, long idReceveBankBranke) {
+    public void sendMoney(long idSendClient, long idSendBankBranche,
+                          long idEmployeeFromSendBankBranche, long idReciveClient) {
         Client clientToSend = clientService.findClientByID(idSendClient);
         Client clientToReceive = clientService.findClientByID(idSendClient);
         BankBranche bankBrancheSend = getBankBrancheByID(idSendBankBranche);
-        BankBranche bankBrancheReceive = getBankBrancheByID(idReceveBankBranke);
-        Employees EmployeeFromSendBankBranche = employeesService.findEmployeesByID(idEmployeeFromSendBankBranche);
 
+        Employees EmployeeFromSendBankBranche = employeesService.findEmployeesByID(idEmployeeFromSendBankBranche);
 
         if (EmployeeFromSendBankBranche.getFunction().equals(EmployeeFunction.CASIER)) {
 
             if (clientToSend.getTypeClient().equals(TypeClient.SEND)) {
-                if(clientToSend.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.MDL)){
 
-                    /////////////
-                    long sendMoney = clientToSend.getAmountCurrency();
-                    bankBrancheSend.setBrancheBalanceMDL((long) (bankBrancheSend.getBrancheBalanceMDL() + sendMoney * 0.1));
-                    clientToSend.setAmountCurrency(0);
-                    // intrgistram in baza de date transferul
-                    TransferMonitoring transferMonitoring = new TransferMonitoring(idSendClient, idReciveClient, sendMoney);
-                    transferMonitoringService.addTransferMonitoring(transferMonitoring);
-                    bankBrancheReceive.setBrancheBalanceMDL((long) (bankBrancheReceive.getBrancheBalanceMDL() + sendMoney * 0.9));
+                // procuentul bancii procentru transfer
+                if (clientToSend.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.MDL)) {
+                    bankBrancheSend.setBrancheBalanceMDL((long)
+                            (bankBrancheSend.getBrancheBalanceMDL() + clientToSend.getAmountCurrency() * 0.1));
+                } else if (clientToSend.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.USD)) {
+                    bankBrancheSend.setBrancheBalanceUSD((long)
+                            (bankBrancheSend.getBrancheBalanceUSD() + clientToSend.getAmountCurrency() * 0.1));
+                } else if (clientToSend.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.EUR)) {
+                    bankBrancheSend.setBrancheBalanceEUR((long)
+                            (bankBrancheSend.getBrancheBalanceEUR() + clientToSend.getAmountCurrency() * 0.1));
+                } else if (clientToSend.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.RON)) {
+                    bankBrancheSend.setBrancheBalanceRON((long)
+                            (bankBrancheSend.getBrancheBalanceRON() + clientToSend.getAmountCurrency() * 0.1));
+                } else {
+                    throw new RuntimeException("dont find money type");
+                }
 
-
-                }
-                if(clientToSend.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.EUR)){
-                    System.out.println("Clientul trimite EUR");
-                }
-                if(clientToSend.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.USD)){
-                    System.out.println("Clientul trimite USD");
-                }
-                if(clientToSend.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.RON)){
-                    System.out.println("Clientul trimite RON");
-                }
+                double sendMoney = clientToSend.getAmountCurrency() * 0.9;
+                clientToSend.setAmountCurrency(0);
+                // intrgistram in baza de date transferul
+                TransferMonitoring transferMonitoring = new TransferMonitoring(idSendClient, idReciveClient,
+                        (long) sendMoney, clientToSend.getTypeCurrensy(), MoneyStatus.WAITING);
+                transferMonitoringService.addTransferMonitoring(transferMonitoring);
             }
         }
-
-
-
-
-
-
-
 
     }
 
     @Override
-    public void receiveMoney(Client reciveClient, BankBranche receveBankBranke, Client sendClient, BankBranche sendBankBranche) {
-//        long idEmployeeFromReceveBankBranke
-//        Employees EmployeeFromReceveBankBrank = employeesService.findEmployeesByID(idEmployeeFromReceveBankBranke);
-    }
+    public void receiveMoney(long idReceiveClient, long idReceveBankBranke,
+                             long idEmployeeFromReceiveBankBranke, long idTransfer) {
 
+        Client clientReceive = clientService.findClientByID(idReceiveClient);
+        BankBranche bankBrancheReceive = getBankBrancheByID(idReceveBankBranke);
+        Employees employeesReceiveBranch = employeesService.findEmployeesByID(idEmployeeFromReceiveBankBranke);
+        TransferMonitoring transferReceveFromBranch = transferMonitoringService.findTransferMonitoringById(idTransfer);
+        System.out.println("client recev is  " + clientReceive);
+
+        if (employeesReceiveBranch.getFunction().equals(EmployeeFunction.CASIER)) {
+            if (clientReceive.getTypeClient().equals(TypeClient.RECEIV)) {
+                if (transferReceveFromBranch.getMoneyStatus().equals(MoneyStatus.WAITING)) { // verficam statul transferului
+                    clientReceive.setAmountCurrency((long) (transferReceveFromBranch.getAmountSend() * 0.9));
+                    clientReceive.setTypeCurrensy(transferReceveFromBranch.getTypeCurrency());
+
+                    // procuentul bancii procentru transfer
+                    if (clientReceive.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.MDL)) {
+                        bankBrancheReceive.setBrancheBalanceMDL((long)
+                                (bankBrancheReceive.getBrancheBalanceMDL() + clientReceive.getAmountCurrency() * 0.1));
+                    } else if (clientReceive.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.USD)) {
+                        bankBrancheReceive.setBrancheBalanceUSD((long)
+                                (bankBrancheReceive.getBrancheBalanceUSD() + clientReceive.getAmountCurrency() * 0.1));
+                    } else if (clientReceive.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.EUR)) {
+                        bankBrancheReceive.setBrancheBalanceEUR((long)
+                                (bankBrancheReceive.getBrancheBalanceEUR() + clientReceive.getAmountCurrency() * 0.1));
+                    } else if (clientReceive.getTypeCurrensy().equals(com.bank.example.bank.demo.model.currency.Currency.RON)) {
+                        bankBrancheReceive.setBrancheBalanceRON((long)
+                                (bankBrancheReceive.getBrancheBalanceRON() + clientReceive.getAmountCurrency() * 0.1));
+                    } else {
+                        throw new RuntimeException("dont find money type");
+                    }
+                    transferReceveFromBranch.setMoneyStatus(MoneyStatus.RECEIVED);
+                }
+            }
+        }
+
+        System.out.println("\nclient recev is  " + clientReceive);
+        System.out.println("\n transfer" + transferReceveFromBranch);
+    }
 
 }
