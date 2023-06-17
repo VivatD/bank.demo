@@ -62,12 +62,16 @@ public class BankBranchController {
         bankBrancheService.changeMoneyService(idClient,toCurrency, idBankBranche, idEmployee);
     }
 
-    @GetMapping("/send/money/sc_{idSendClient}/sb_{idSendBankBranche}/se_{idEmployeeFromSendBankBranche}/rc_{idReciveClient}/rb_{idReceveBankBranke}")
+    @GetMapping("/send/money/sc_{idSendClient}/sb_{idSendBankBranche}/se_{idEmployeeFromSendBankBranche}/rc_{idReciveClient}")
     public void sendMoneyService(@PathVariable long idSendClient, @PathVariable  long idSendBankBranche,
-                                 @PathVariable long idEmployeeFromSendBankBranche, @PathVariable  long idReciveClient,
-                                 @PathVariable long idReceveBankBranke ){
+                                 @PathVariable long idEmployeeFromSendBankBranche, @PathVariable  long idReciveClient){
         bankBrancheService.sendMoney(idSendClient, idSendBankBranche, idEmployeeFromSendBankBranche,
-                idReciveClient, idReceveBankBranke);
+                idReciveClient);
     }
+    @GetMapping("/receive/money/rc_{idReceiveClient}/rb_{idReceveBankBranke}/re_{idEmployeeFromReceiveBankBranke}/tr_{idTransfer}")
+    public void receiveMoneyService(@PathVariable long idReceiveClient, @PathVariable long idReceveBankBranke,
+                                    @PathVariable long idEmployeeFromReceiveBankBranke, @PathVariable long idTransfer ){
+        bankBrancheService.receiveMoney(idReceiveClient, idReceveBankBranke, idEmployeeFromReceiveBankBranke, idTransfer);
 
+    }
 }

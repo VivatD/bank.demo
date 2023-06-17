@@ -19,7 +19,8 @@ public interface BankBrancheService {
 
     void changeMoney(Client client, Currency toCurrency, BankBranche bankBranche);
     void changeMoneyService(long idClient, Currency toCurrency, long idBankBranche, long idEmployee);
-    void sendMoney(long idSendClient, long  idSendBankBranche, long idEmployeeFromSendBankBranche,
-                   long idReciveClient, long idReceveBankBranke );
-    void receiveMoney(Client reciveClient, BankBranche receveBankBranke, Client sendClient, BankBranche sendBankBranche);
+    void sendMoney(long idSendClient, long  idSendBankBranche,
+                   long idEmployeeFromSendBankBranche, long idReciveClient );
+    void receiveMoney(long idReceiveClient, long idReceveBankBranke,
+                      long idEmployeeFromReceiveBankBranke, long idTransfer);
 }

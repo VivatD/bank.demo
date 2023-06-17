@@ -1,6 +1,7 @@
 package com.bank.example.bank.demo.model.currency;
 
 import com.bank.example.bank.demo.model.bank.BankBranche;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class ExchangeCurrency {
     private double sellRON;
     @Column(name = "buyRON")
     private double buyRON;
+    @JsonIgnore
     @OneToMany
     private List<BankBranche> bankBrancheList = new ArrayList<>();
     @Column(name = "date")

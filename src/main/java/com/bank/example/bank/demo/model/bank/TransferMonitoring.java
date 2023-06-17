@@ -1,12 +1,13 @@
 package com.bank.example.bank.demo.model.bank;
 
+import com.bank.example.bank.demo.model.currency.Currency;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "transfer")
 public class TransferMonitoring {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idTransfer;
     @Column(name = "client_send")
     private long idClientSend;
@@ -14,21 +15,31 @@ public class TransferMonitoring {
     private long idClientRecevie;
     @Column(name = "amount_send")
     private long amountSend;
+    @Column(name = "type_currency")
+    private Currency typeCurrency;
+    @Column(name = "money_status")
+    private MoneyStatus moneyStatus;
 
     public TransferMonitoring() {
     }
 
-    public TransferMonitoring(long idTransfer, long idClientSend, long idClientRecevie, long amountSend) {
+    public TransferMonitoring(long idTransfer, long idClientSend, long idClientRecevie,
+                              long amountSend, Currency typeCurrency, MoneyStatus moneyStatus) {
         this.idTransfer = idTransfer;
         this.idClientSend = idClientSend;
         this.idClientRecevie = idClientRecevie;
         this.amountSend = amountSend;
+        this.typeCurrency = typeCurrency;
+        this.moneyStatus = moneyStatus;
     }
 
-    public TransferMonitoring(long idClientSend, long idClientRecevie, long amountSend) {
+    public TransferMonitoring(long idClientSend, long idClientRecevie,
+                              long amountSend, Currency typeCurrency, MoneyStatus moneyStatus) {
         this.idClientSend = idClientSend;
         this.idClientRecevie = idClientRecevie;
         this.amountSend = amountSend;
+        this.typeCurrency = typeCurrency;
+        this.moneyStatus = moneyStatus;
     }
 
     public long getAmountSend() {
@@ -63,12 +74,31 @@ public class TransferMonitoring {
         this.idClientRecevie = idClientRecevie;
     }
 
+    public Currency getTypeCurrency() {
+        return typeCurrency;
+    }
+
+    public void setTypeCurrency(Currency typeCurrency) {
+        this.typeCurrency = typeCurrency;
+    }
+
+    public MoneyStatus getMoneyStatus() {
+        return moneyStatus;
+    }
+
+    public void setMoneyStatus(MoneyStatus moneyStatus) {
+        this.moneyStatus = moneyStatus;
+    }
+
     @Override
     public String toString() {
         return "TransferMonitoring{" +
                 "idTransfer=" + idTransfer +
                 ", idClientSend=" + idClientSend +
                 ", idClientRecevie=" + idClientRecevie +
+                ", amountSend=" + amountSend +
+                ", typeCurrency=" + typeCurrency +
+                ", moneyStatus=" + moneyStatus +
                 '}';
     }
 }
