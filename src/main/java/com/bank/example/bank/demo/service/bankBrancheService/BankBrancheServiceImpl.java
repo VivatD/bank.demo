@@ -1,6 +1,8 @@
 package com.bank.example.bank.demo.service.bankBrancheService;
 
-import com.bank.example.bank.demo.model.bank.Bank;
+import com.bank.example.bank.demo.exeption.InvalidClientTypeException;
+import com.bank.example.bank.demo.exeption.InvalidPositionException;
+import com.bank.example.bank.demo.exeption.InvalidStatutMoneyException;
 import com.bank.example.bank.demo.model.bank.BankBranche;
 import com.bank.example.bank.demo.model.bank.MoneyStatus;
 import com.bank.example.bank.demo.model.bank.TransferMonitoring;
@@ -10,17 +12,11 @@ import com.bank.example.bank.demo.model.currency.*;
 import com.bank.example.bank.demo.model.employee.EmployeeFunction;
 import com.bank.example.bank.demo.model.employee.Employees;
 import com.bank.example.bank.demo.repository.BankBranchRepository;
-import com.bank.example.bank.demo.repository.BankRepository;
-import com.bank.example.bank.demo.service.bankService.BankService;
-import com.bank.example.bank.demo.service.bankService.BankServiceImpl;
 import com.bank.example.bank.demo.service.clientService.ClientService;
-import com.bank.example.bank.demo.service.clientService.ClientServiceImpl;
 import com.bank.example.bank.demo.service.employeesService.EmployeesService;
-import com.bank.example.bank.demo.service.exchangeCurrency.ExchangeCurrencyService;
 import com.bank.example.bank.demo.service.transferMonitoring.TransferMonitoringService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -195,7 +191,11 @@ public class BankBrancheServiceImpl implements BankBrancheService {
                         client.setAmountCurrency((long) recevedchangedMoney); // comisionul
                     }
 
+                } else {
+                    throw new InvalidClientTypeException("to chnage money, the client's type must be chnage");
                 }
+            } else {
+                throw new InvalidPositionException("Wrong function of the bank employee!!!");
             }
         }
     }
@@ -207,7 +207,6 @@ public class BankBrancheServiceImpl implements BankBrancheService {
     public void sendMoney(long idSendClient, long idSendBankBranche,
                           long idEmployeeFromSendBankBranche, long idReciveClient) {
         Client clientToSend = clientService.findClientByID(idSendClient);
-        Client clientToReceive = clientService.findClientByID(idSendClient);
         BankBranche bankBrancheSend = getBankBrancheByID(idSendBankBranche);
 
         Employees EmployeeFromSendBankBranche = employeesService.findEmployeesByID(idEmployeeFromSendBankBranche);
@@ -239,9 +238,13 @@ public class BankBrancheServiceImpl implements BankBrancheService {
                 TransferMonitoring transferMonitoring = new TransferMonitoring(idSendClient, idReciveClient,
                         (long) sendMoney, clientToSend.getTypeCurrensy(), MoneyStatus.WAITING);
                 transferMonitoringService.addTransferMonitoring(transferMonitoring);
+            } else {
+                throw new InvalidClientTypeException("to send money, the client's type must be SEND");
             }
-        }
+        } else {
+            throw new InvalidPositionException("Wrong function of the bank employee!!!");
 
+        }
     }
 
     @Override
@@ -277,8 +280,15 @@ public class BankBrancheServiceImpl implements BankBrancheService {
                         throw new RuntimeException("dont find money type");
                     }
                     transferReceveFromBranch.setMoneyStatus(MoneyStatus.RECEIVED);
+
+                } else {
+                    throw new InvalidStatutMoneyException("Wrong money status of the transfer, must be WAITING!!!");
                 }
+            } else {
+                throw new InvalidClientTypeException("to receiv money, the client's type must be receiv");
             }
+        } else {
+            throw new InvalidPositionException("Wrong function of the bank employee!!!");
         }
 
         System.out.println("\nclient recev is  " + clientReceive);
