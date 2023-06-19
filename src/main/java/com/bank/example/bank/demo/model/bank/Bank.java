@@ -31,7 +31,7 @@ public class Bank {
     @Column(name = "balance_RON")
     private long balanceRON;
 
-  //  @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "bank")
     private List<BankBranche> bankBrancheList = new ArrayList<>();
 
@@ -146,17 +146,5 @@ public class Bank {
         this.balanceRON = balanceRON;
     }
 
-    @Override
-    public String toString() {
-        return "Bank{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", balanceMDL=" + balanceMDL +
-                ", balanceEUR=" + balanceEUR +
-                ", balanceUSD=" + balanceUSD +
-                ", balanceRON=" + balanceRON +
-                ", bankBrancheList=" + bankBrancheList +
-                '}';
-    }
+
 }
