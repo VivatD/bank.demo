@@ -92,6 +92,16 @@ public class BankServiceTest {
 		exchangeCurrency.setSellEUR((long) 19.84);
 
 		exchangeCurrencyService.addExchangeCurrency(exchangeCurrency);
+		Calendar calendar1 = Calendar.getInstance();
+		calendar.set(2008, 2, 13);
+		Date date1 = calendar.getTime();
+
+		ExchangeCurrency exchangeCurrency1 = new ExchangeCurrency();
+		exchangeCurrency.setDate(date);
+		exchangeCurrency.setBuyUSD((long) 17.50);
+		exchangeCurrency.setSellEUR((long) 19.54);
+
+		exchangeCurrencyService.addExchangeCurrency(exchangeCurrency);
 
 		ExchangeCurrency foundExchangeCurrency = exchangeCurrencyService.findExchangeCurrencyByDate(date);
 		Assertions.assertEquals(exchangeCurrency, foundExchangeCurrency);
