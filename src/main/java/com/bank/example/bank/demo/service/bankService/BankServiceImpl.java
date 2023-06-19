@@ -170,16 +170,16 @@ public class BankServiceImpl implements BankService {
 
         for (BankBranche branche : arrayListBankBrach) {
 
-            branche.setBrancheBalanceRON((long) (bank.getBalanceRON() * 0.001));
+            branche.setBrancheBalanceRON((long)  (branche.getBrancheBalanceRON() + bank.getBalanceRON() * 0.001));
             bank.setBalanceRON(bank.getBalanceRON() - branche.getBrancheBalanceRON());
 
-            branche.setBrancheBalanceUSD((long) (bank.getBalanceUSD() * 0.001));
+            branche.setBrancheBalanceUSD((long) (branche.getBrancheBalanceUSD() + bank.getBalanceUSD() * 0.001));
             bank.setBalanceUSD(bank.getBalanceUSD() - branche.getBrancheBalanceUSD());
 
-            branche.setBrancheBalanceEUR((long) (bank.getBalanceEUR() * 0.001));
+            branche.setBrancheBalanceEUR((long) (branche.getBrancheBalanceEUR() + bank.getBalanceEUR() * 0.001));
             bank.setBalanceEUR(bank.getBalanceEUR() - branche.getBrancheBalanceEUR());
 
-            branche.setBrancheBalanceMDL((long) (bank.getBalanceMDL() * 0.001));
+            branche.setBrancheBalanceMDL((long) (branche.getBrancheBalanceMDL() + bank.getBalanceMDL() * 0.001));
             bank.setBalanceMDL(bank.getBalanceMDL() - branche.getBrancheBalanceMDL());
 
             System.out.println("brache is " + branche.toString());
