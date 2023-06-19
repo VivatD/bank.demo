@@ -1,6 +1,7 @@
 package com.bank.example.bank.demo.service.clientService;
 
 import com.bank.example.bank.demo.model.client.Client;
+import com.bank.example.bank.demo.model.client.TypeClient;
 import com.bank.example.bank.demo.repository.ClientRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +102,13 @@ public class ClientServiceImpl implements ClientService {
         exClient.setTypeCurrensy(client.getTypeCurrensy());
         exClient.setAmountCurrency(client.getAmountCurrency());
         clientRepository.save(exClient);
+    }
+
+    @Override
+    public void updateStatusClient(long idClient, TypeClient typeClient) {
+        Client client = findClientByID(idClient);
+        client.setTypeClient(typeClient);
+        clientRepository.save(client);
     }
 
 

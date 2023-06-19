@@ -1,6 +1,7 @@
 package com.bank.example.bank.demo.service.clientService;
 
 import com.bank.example.bank.demo.model.client.Client;
+import com.bank.example.bank.demo.model.client.TypeClient;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ public interface ClientService {
     void deleteClientByID(long id);
 
     void updateClient(Client client);
+
+    void updateStatusClient(long idClient, TypeClient typeClient);
 
 
 }

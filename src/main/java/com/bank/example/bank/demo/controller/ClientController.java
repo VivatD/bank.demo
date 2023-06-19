@@ -1,6 +1,7 @@
 package com.bank.example.bank.demo.controller;
 
 import com.bank.example.bank.demo.model.client.Client;
+import com.bank.example.bank.demo.model.client.TypeClient;
 import com.bank.example.bank.demo.service.clientService.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,10 @@ public class ClientController {
     @PutMapping("/update")
     void updateClient(@RequestBody Client client){
         clientService.updateClient(client);
+    }
+    @GetMapping("/update/status/id_{id}/type_{typeClient}")
+    void updateClientStatus(@PathVariable long id, @PathVariable TypeClient typeClient){
+        clientService.updateStatusClient(id, typeClient);
     }
 
 
