@@ -1,7 +1,7 @@
 # bank.demo
-							REST API    \n
-========================== CLIENT      ==========================   \n
-http://localhost:8080/client/all                                             \n
+							REST API   
+========================== CLIENT      ==========================   
+http://localhost:8080/client/all                                             
 http://localhost:8080/client/add
 http://localhost:8080/client/firstname/{firstname}
 http://localhost:8080/client/lastname/{lastname}
