@@ -1,9 +1,9 @@
 # bank.demo
-							REST API
-========================== CLIENT      ==========================
-http://localhost:8080/client/all
-http://localhost:8080/client/add
-http://localhost:8080/client/firstname/{firstname}
+#							REST API
+#========================== CLIENT      ==========================
+#http://localhost:8080/client/all
+#http://localhost:8080/client/add
+#http://localhost:8080/client/firstname/{firstname}
 http://localhost:8080/client/lastname/{lastname}
 http://localhost:8080/client/idnp/{idnp}
 http://localhost:8080/client/id/{id}  @get
